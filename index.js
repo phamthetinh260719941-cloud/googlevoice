@@ -8,6 +8,8 @@ const PORT = process.env.PORT || 3000;
 app.get("/tts", async (req, res) => {
   try {
     const q = req.query.q;
+    const lang = req.query.lang || "vi"; // mặc định là tiếng Việt nếu không truyền tham số
+
     if (!q || !q.trim()) {
       return res.status(400).send("Thiếu tham số q");
     }
@@ -15,8 +17,10 @@ app.get("/tts", async (req, res) => {
     // Giới hạn độ dài text
     const text = q.trim().slice(0, 200);
 
-    // Gọi Google Translate TTS
-    const googleUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=vi&client=tw-ob`;
+    // Gọi Google Translate TTS với ngôn ngữ tùy chọn
+    const googleUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+      text
+    )}&tl=${lang}&client=tw-ob`;
 
     const response = await fetch(googleUrl, {
       method: "GET",
