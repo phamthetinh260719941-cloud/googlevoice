@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.get("/tts", async (req, res) => {
   try {
     const q = req.query.q;
-    const lang = req.query.lang || "vi"; // mặc định là tiếng Việt nếu không truyền tham số
+    const lang = req.query.lang || "en"; // mặc định là tiếng anh nếu không truyền tham số
 
     if (!q || !q.trim()) {
       return res.status(400).send("Thiếu tham số q");
