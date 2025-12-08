@@ -45,6 +45,9 @@ app.get("/tts", async (req, res) => {
     res.status(500).send("Không lấy được audio TTS");
   }
 });
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 app.listen(PORT, () => {
   console.log(`✅ googlevoice backend chạy ở port ${PORT}`);
